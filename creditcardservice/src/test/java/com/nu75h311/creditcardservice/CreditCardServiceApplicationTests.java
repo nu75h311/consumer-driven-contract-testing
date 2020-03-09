@@ -10,10 +10,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
+import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties;
 import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc // instantiates a MockMvc bean configured to point to a mock web environment
+@AutoConfigureStubRunner(ids = "com.nu75h311:creditcheckservice:+:stubs:8080", stubsMode = StubRunnerProperties.StubsMode.LOCAL) // boot WireMock and import the stubs
 class CreditCardServiceApplicationTests {
 
     @Autowired
@@ -25,7 +28,7 @@ class CreditCardServiceApplicationTests {
                 post("/credit-card-applications")
                         .contentType(APPLICATION_JSON)
                         .content("{" +
-                                "\"citizenNumber\": 1234" +
+                                "\"citizenNumber\": 1234," +
                                 "\"cardType\": \"GOLD\"" +
                                 "}"))
                 .andDo(print())
