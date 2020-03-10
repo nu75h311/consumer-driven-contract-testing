@@ -1,4 +1,4 @@
-package com.nu75h311.creditcardservice;
+package com.nu75h311.creditcheckservice.gateway;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,11 @@ public class CreditCheckResponse {
 
     private Score score;
 
+    public CreditCheckResponse(final Score score) {
+        this.score = score;
+    }
+
     public enum Score {
-        HIGH
+        HIGH, LOW
     }
 }

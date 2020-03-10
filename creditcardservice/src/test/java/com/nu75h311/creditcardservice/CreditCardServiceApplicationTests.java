@@ -28,15 +28,32 @@ class CreditCardServiceApplicationTests {
                 post("/credit-card-applications")
                         .contentType(APPLICATION_JSON)
                         .content("{" +
-                                "\"citizenNumber\": 1234," +
-                                "\"cardType\": \"GOLD\"" +
-                                "}"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().json("{" +
-                        "\"status\":\"GRANTED\"" +
-                        "}"))
-                .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON));
+                                         "\"citizenNumber\": 1234," +
+                                         "\"cardType\": \"GOLD\"" +
+                                         "}"))
+               .andDo(print())
+               .andExpect(status().isOk())
+               .andExpect(content().json("{" +
+                                                 "\"status\":\"GRANTED\"" +
+                                                 "}"))
+               .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON));
+    }
+
+    @Test
+    void should_deny_application_when_credit_score_is_low() throws Exception {
+        mockMvc.perform(
+                post("/credit-card-applications")
+                        .contentType(APPLICATION_JSON)
+                        .content("{" +
+                                         "\"citizenNumber\": 4444," +
+                                         "\"cardType\": \"GOLD\"" +
+                                         "}"))
+               .andDo(print())
+               .andExpect(status().isOk())
+               .andExpect(content().json("{" +
+                                                 "\"status\":\"DENIED\"" +
+                                                 "}"))
+               .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON));
     }
 
 }

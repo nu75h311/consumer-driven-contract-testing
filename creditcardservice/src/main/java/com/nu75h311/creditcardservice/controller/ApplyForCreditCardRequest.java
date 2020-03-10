@@ -1,4 +1,4 @@
-package com.nu75h311.creditcardservice;
+package com.nu75h311.creditcardservice.controller;
 
 import lombok.Getter;
 import lombok.Setter;

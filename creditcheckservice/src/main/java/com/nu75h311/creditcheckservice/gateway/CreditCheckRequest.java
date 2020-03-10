@@ -1,4 +1,4 @@
-package com.nu75h311.creditcheckservice;
+package com.nu75h311.creditcheckservice.gateway;
 
 import lombok.Getter;
 import lombok.Setter;
