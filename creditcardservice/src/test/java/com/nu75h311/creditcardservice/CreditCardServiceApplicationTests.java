@@ -1,9 +1,11 @@
 package com.nu75h311.creditcardservice;
 
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
@@ -34,10 +36,8 @@ class CreditCardServiceApplicationTests {
                                 "}"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().json("{" +
-                        "\"status\":\"GRANTED\"," +
-                        "\"uuid\":\"66ce29f3-ae87-4097-94e8-60b3b10c3855\"" +
-                        "}"))
+                .andExpect(jsonPath("$.status").value("GRANTED"))
+                .andExpect(jsonPath("$.uuid").value(notNullValue()))
                 .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON));
     }
 
@@ -52,10 +52,8 @@ class CreditCardServiceApplicationTests {
                                 "}"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().json("{" +
-                        "\"status\":\"DENIED\"," +
-                        "\"uuid\":\"66ce29f3-ae87-4097-94e8-60b3b10c3855\"" +
-                        "}"))
+                .andExpect(jsonPath("$.status").value("DENIED"))
+                .andExpect(jsonPath("$.uuid").value(notNullValue()))
                 .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON));
     }
 
