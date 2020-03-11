@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.nu75h311</groupId>
-	<artifactId>creditcardservice</artifactId>
+	<artifactId>credit-check-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>creditcardservice</name>
-	<description>Creditcard service consumer</description>
+	<name>credit-check-service</name>
+	<description>Credit check service provider</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -35,26 +35,40 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
-		<dependency><!-- allows to run the stubs on the consumer side tests -->
+		<dependency><!-- allows the use of contract DSL -->
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-contract-stub-runner</artifactId>
-			<version>2.2.1.RELEASE</version>
+			<artifactId>spring-cloud-starter-contract-verifier</artifactId>
 		</dependency>
 	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Hoxton.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin><!-- allows maven to generate stubs and tests from contracts -->
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-contract-maven-plugin</artifactId>
+				<version>2.2.1.RELEASE</version>
+				<extensions>true</extensions>
+				<configuration><!-- generated test classes will inherit from this class -->
+					<baseClassForTests>com.nu75h311.creditcheckservice.BaseContractTest</baseClassForTests>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

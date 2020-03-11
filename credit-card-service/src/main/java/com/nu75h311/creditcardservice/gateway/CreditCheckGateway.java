@@ -25,6 +25,7 @@ public class CreditCheckGateway {
         final CreditCheckRequest request = new CreditCheckRequest(citizenNumber);
         final CreditCheckResponse creditCheckResponse = restTemplate.postForObject(uri, request, CreditCheckResponse.class);
 
+        assert creditCheckResponse != null;
         if (!creditCheckResponse.getUuid().equals(request.getUuid())) {
             throw new RuntimeException("If these don't match, something horrible happens.");
         }
