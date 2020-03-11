@@ -16,7 +16,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc // instantiates a MockMvc bean configured to point to a mock web environment
-@AutoConfigureStubRunner(ids = "com.nu75h311:creditcheckservice:+:stubs:8080", stubsMode = StubRunnerProperties.StubsMode.LOCAL) // boot WireMock and import the stubs
+@AutoConfigureStubRunner(ids = "com.nu75h311:creditcheckservice:+:stubs:8080", stubsMode = StubRunnerProperties.StubsMode.LOCAL) // boot WireMock and
+                                                                                                                                 // import the stubs
 class CreditCardServiceApplicationTests {
 
     @Autowired
@@ -28,15 +29,16 @@ class CreditCardServiceApplicationTests {
                 post("/credit-card-applications")
                         .contentType(APPLICATION_JSON)
                         .content("{" +
-                                         "\"citizenNumber\": 1234," +
-                                         "\"cardType\": \"GOLD\"" +
-                                         "}"))
-               .andDo(print())
-               .andExpect(status().isOk())
-               .andExpect(content().json("{" +
-                                                 "\"status\":\"GRANTED\"" +
-                                                 "}"))
-               .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON));
+                                "\"citizenNumber\": 1234," +
+                                "\"cardType\": \"GOLD\"" +
+                                "}"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json("{" +
+                        "\"status\":\"GRANTED\"," +
+                        "\"uuid\":\"66ce29f3-ae87-4097-94e8-60b3b10c3855\"" +
+                        "}"))
+                .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON));
     }
 
     @Test
@@ -45,15 +47,16 @@ class CreditCardServiceApplicationTests {
                 post("/credit-card-applications")
                         .contentType(APPLICATION_JSON)
                         .content("{" +
-                                         "\"citizenNumber\": 4444," +
-                                         "\"cardType\": \"GOLD\"" +
-                                         "}"))
-               .andDo(print())
-               .andExpect(status().isOk())
-               .andExpect(content().json("{" +
-                                                 "\"status\":\"DENIED\"" +
-                                                 "}"))
-               .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON));
+                                "\"citizenNumber\": 4444," +
+                                "\"cardType\": \"GOLD\"" +
+                                "}"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json("{" +
+                        "\"status\":\"DENIED\"," +
+                        "\"uuid\":\"66ce29f3-ae87-4097-94e8-60b3b10c3855\"" +
+                        "}"))
+                .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON));
     }
 
 }

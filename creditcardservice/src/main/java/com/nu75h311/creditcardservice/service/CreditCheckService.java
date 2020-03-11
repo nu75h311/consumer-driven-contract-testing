@@ -24,13 +24,16 @@ public class CreditCheckService {
 
     public ApplyForCreditCardResponse doCheckForCitizen(ApplyForCreditCardRequest applyForCreditCardRequest) {
 
-        final CreditCheckResponse.Score score = creditCheckGateway.doCreditCheckForCitizen(applyForCreditCardRequest.getCitizenNumber());
+        final CreditCheckResponse creditCheckResponse = creditCheckGateway.doCreditCheckForCitizen(applyForCreditCardRequest.getCitizenNumber());
+
+        final CreditCheckResponse.Score score = creditCheckResponse.getScore();
+        final String uuid = creditCheckResponse.getUuid();
 
         if (applyForCreditCardRequest.getCardType() == GOLD) {
             if (score == HIGH) {
-                return new ApplyForCreditCardResponse(GRANTED);
+                return new ApplyForCreditCardResponse(GRANTED, uuid);
             } else if (score == LOW) {
-                return new ApplyForCreditCardResponse(DENIED);
+                return new ApplyForCreditCardResponse(DENIED, uuid);
             }
         }
 

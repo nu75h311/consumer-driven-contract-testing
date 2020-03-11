@@ -8,6 +8,7 @@ import lombok.Setter;
 public class CreditCheckResponse {
 
     private Score score;
+    private String uuid;
 
     public enum Score {
         HIGH, LOW
