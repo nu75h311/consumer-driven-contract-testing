@@ -11,6 +11,8 @@
 	<groupId>com.nu75h311</groupId>
 	<artifactId>credit-check-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
 	<name>credit-check-service</name>
 	<description>Credit check service provider</description>
 
@@ -68,6 +70,11 @@
 				<extensions>true</extensions>
 				<configuration><!-- generated test classes will inherit from this class -->
 					<baseClassForTests>com.nu75h311.creditcheckservice.BaseContractTest</baseClassForTests>
+					<contractsMode>LOCAL</contractsMode>
+					<contractDependency>
+						<groupId>com.nu75h311</groupId>
+						<artifactId>centralized-contract-repo</artifactId>
+					</contractDependency>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -11,6 +11,7 @@
 	<groupId>com.nu75h311</groupId>
 	<artifactId>credit-card-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+
 	<name>credit-card-service</name>
 	<description>Credit card service consumer</description>
 

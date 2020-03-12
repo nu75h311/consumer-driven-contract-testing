@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc // instantiates a MockMvc bean configured to point to a mock web environment
-@AutoConfigureStubRunner(ids = "com.nu75h311:creditcheckservice:+:stubs:8080", stubsMode = StubRunnerProperties.StubsMode.LOCAL) // boot WireMock and
+@AutoConfigureStubRunner(ids = "com.nu75h311:credit-check-service:+:stubs:8080", stubsMode = StubRunnerProperties.StubsMode.LOCAL) // boot WireMock and
                                                                                                                                  // import the stubs
 class CreditCardServiceApplicationTests {
 

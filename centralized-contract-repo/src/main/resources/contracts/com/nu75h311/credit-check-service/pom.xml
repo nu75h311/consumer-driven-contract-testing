@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.nu75h311</groupId>
+	<artifactId>credit-check-service</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>credit-check-service</name>
+	<description>Credit check service provider contracts</description>
+
+	<build>
+		<plugins>
+			<plugin><!-- allows maven to generate stubs and tests from contracts -->
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-contract-maven-plugin</artifactId>
+				<version>2.2.1.RELEASE</version>
+				<extensions>true</extensions>
+				<configuration><!-- generated test classes will inherit from this class -->
+					<contractsDirectory>${project.basedir}</contractsDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
