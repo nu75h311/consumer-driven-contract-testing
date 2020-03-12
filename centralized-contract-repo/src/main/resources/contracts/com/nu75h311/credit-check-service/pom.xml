@@ -11,6 +11,25 @@
 	<name>credit-check-service</name>
 	<description>Credit check service provider contracts</description>
 
+	<dependencies>
+		<dependency><!-- allows the use of contract DSL -->
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-contract-verifier</artifactId>
+		</dependency>
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Hoxton.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<build>
 		<plugins>
 			<plugin><!-- allows maven to generate stubs and tests from contracts -->
