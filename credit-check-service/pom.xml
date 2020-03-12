@@ -43,6 +43,15 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-contract-verifier</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-stream-test-support</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -69,7 +78,17 @@
 				<version>2.2.1.RELEASE</version>
 				<extensions>true</extensions>
 				<configuration><!-- generated test classes will inherit from this class -->
-					<baseClassForTests>com.nu75h311.creditcheckservice.BaseContractTest</baseClassForTests>
+					<baseClassMappings>
+						<baseClassMapping>
+							<contractPackageRegex>.*http.*</contractPackageRegex>
+							<baseClassFQN>com.nu75h311.creditcheckservice.BaseContractTest</baseClassFQN>
+						</baseClassMapping>
+						<baseClassMapping>
+							<contractPackageRegex>.*messaging.*</contractPackageRegex>
+							<baseClassFQN>com.nu75h311.creditcheckservice.BaseContractTestMessaging</baseClassFQN>
+						</baseClassMapping>
+					</baseClassMappings>
+<!--					<baseClassForTests>com.nu75h311.creditcheckservice.BaseContractTest</baseClassForTests>-->
 					<contractsMode>LOCAL</contractsMode>
 					<contractDependency>
 						<groupId>com.nu75h311</groupId>
