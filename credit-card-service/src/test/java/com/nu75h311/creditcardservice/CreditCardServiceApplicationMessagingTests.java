@@ -14,8 +14,10 @@ import org.springframework.cloud.contract.stubrunner.StubTrigger;
 import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
 import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties;
 
+import com.nu75h311.creditcardservice.gateway.CreditCheckRequest;
 import com.nu75h311.creditcardservice.gateway.CreditCheckResponse;
 import com.nu75h311.creditcardservice.gateway.CreditCheckResponse.Score;
+import com.nu75h311.creditcardservice.producer.CreditScoreProducer;
 import com.nu75h311.creditcardservice.repository.CreditScoreRepository;
 
 @SpringBootTest (webEnvironment = SpringBootTest.WebEnvironment.NONE)
@@ -30,11 +32,24 @@ class CreditCardServiceApplicationMessagingTests {
     @Autowired
     private CreditScoreRepository creditScoreRepository;
 
+    @Autowired
+    private CreditScoreProducer creditScoreProducer;
+
     @Test
     public void should_store_results_of_a_credit_check(){
         final UUID uuid = UUID.fromString("67bb6459-b718-4cbd-b015-6fc80aef7d31");
 
         stubTrigger.trigger("score_of_high");
+
+        final Score score = creditScoreRepository.getScore(uuid);
+
+        assertThat(score).isEqualTo(HIGH);
+    }
+
+    @Test
+    public void should_output_credit_score_when_requesting_credit_score() {
+        creditScoreProducer.requestScore(new CreditCheckRequest(1234));
+        final UUID uuid = UUID.fromString("29799ba2-b8db-4a98-8d12-46e09e129122");
 
         final Score score = creditScoreRepository.getScore(uuid);
 
